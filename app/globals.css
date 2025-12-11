@@ -2,25 +2,109 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #0B1221;
 }
 
 @theme inline {
+  /* Brevo Brand Colors */
+  --color-primary: #00925D;
+  --color-primary-dark: #007A4D;
+  --color-primary-light: #00B371;
+  --color-secondary: #0068FF;
+  --color-secondary-dark: #0052CC;
+  --color-dark: #0B1221;
+  --color-dark-light: #1A2332;
+
+  /* Semantic Colors */
+  --color-success: #059669;
+  --color-warning: #F59E0B;
+  --color-error: #EF4444;
+  --color-info: #3B82F6;
+
+  /* Leaderboard Colors */
+  --color-gold: #FFD700;
+  --color-gold-bg: #FEF9C3;
+  --color-silver: #C0C0C0;
+  --color-silver-bg: #F3F4F6;
+  --color-bronze: #CD7F32;
+  --color-bronze-bg: #FED7AA;
+
+  /* Base Colors */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  /* Fonts */
+  --font-sans: var(--font-geist-sans), system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), monospace;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a1a1a1;
+}
+
+/* Animation Classes */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.3s ease-out;
+}
+
+.animate-slide-up {
+  animation: slide-up 0.3s ease-out;
+}
+
+/* Leaderboard Row Gradients */
+.rank-gold {
+  background: linear-gradient(90deg, rgba(255, 215, 0, 0.15) 0%, rgba(255, 215, 0, 0.05) 100%);
+  border-left: 4px solid var(--color-gold);
+}
+
+.rank-silver {
+  background: linear-gradient(90deg, rgba(192, 192, 192, 0.15) 0%, rgba(192, 192, 192, 0.05) 100%);
+  border-left: 4px solid var(--color-silver);
+}
+
+.rank-bronze {
+  background: linear-gradient(90deg, rgba(205, 127, 50, 0.15) 0%, rgba(205, 127, 50, 0.05) 100%);
+  border-left: 4px solid var(--color-bronze);
 }

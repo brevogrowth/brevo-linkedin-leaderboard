@@ -8,6 +8,8 @@ import {
   Check,
   X,
   AlertCircle,
+  Copy,
+  ExternalLink,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -27,6 +29,53 @@ import { AppHeader } from '@/components/layout/app-header';
 import { formatRelativeTime } from '@/config/branding';
 import { TEAM_OPTIONS, TEAM_DISPLAY_NAMES } from '@/lib/validation/user-schema';
 import type { TrackedUser, TeamType } from '@/types/database.types';
+
+// Extract LinkedIn handle from URL
+function getLinkedInHandle(url: string): string {
+  return url.replace(/^https?:\/\/(www\.)?linkedin\.com\/in\//, '').replace(/\/$/, '');
+}
+
+// LinkedIn URL cell with copy button
+function LinkedInUrlCell({ url }: { url: string }) {
+  const [copied, setCopied] = useState(false);
+  const handle = getLinkedInHandle(url);
+
+  const handleCopy = async (e: React.MouseEvent) => {
+    e.stopPropagation();
+    await navigator.clipboard.writeText(url);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  return (
+    <div className="flex items-center gap-2 group">
+      <span className="text-sm text-gray-600 font-mono">@{handle}</span>
+      <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+        <button
+          onClick={handleCopy}
+          className="p-1 rounded hover:bg-gray-100 text-gray-400 hover:text-gray-600"
+          title={copied ? 'Copied!' : 'Copy URL'}
+        >
+          {copied ? (
+            <Check className="h-3.5 w-3.5 text-green-500" />
+          ) : (
+            <Copy className="h-3.5 w-3.5" />
+          )}
+        </button>
+        <a
+          href={url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="p-1 rounded hover:bg-gray-100 text-gray-400 hover:text-[#0A66C2]"
+          title="Open profile"
+          onClick={(e) => e.stopPropagation()}
+        >
+          <ExternalLink className="h-3.5 w-3.5" />
+        </a>
+      </div>
+    </div>
+  );
+}
 
 export default function AdminUsersPage() {
   const [users, setUsers] = useState<TrackedUser[]>([]);
@@ -268,14 +317,7 @@ export default function AdminUsersPage() {
                     <TableRow key={user.id}>
                       <TableCell className="font-medium">{user.name}</TableCell>
                       <TableCell>
-                        <a
-                          href={user.linkedin_url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-primary hover:underline text-sm truncate block max-w-[200px]"
-                        >
-                          {user.linkedin_url.replace('https://www.linkedin.com/in/', '')}
-                        </a>
+                        <LinkedInUrlCell url={user.linkedin_url} />
                       </TableCell>
                       <TableCell>
                         <Badge variant="outline">

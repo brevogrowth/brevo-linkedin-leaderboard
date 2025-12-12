@@ -28,12 +28,7 @@ import { formatRelativeTime } from '@/config/branding';
 import { TEAM_OPTIONS, TEAM_DISPLAY_NAMES } from '@/lib/validation/user-schema';
 import type { TrackedUser, TeamType } from '@/types/database.types';
 
-// This component is used by the admin layout which handles authentication
-interface AdminUsersPageProps {
-  isAuthenticated?: boolean;
-}
-
-export default function AdminUsersPage({ isAuthenticated = true }: AdminUsersPageProps) {
+export default function AdminUsersPage() {
   const [users, setUsers] = useState<TrackedUser[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState('');
@@ -53,10 +48,8 @@ export default function AdminUsersPage({ isAuthenticated = true }: AdminUsersPag
 
   // Fetch users on mount
   useEffect(() => {
-    if (isAuthenticated) {
-      fetchUsers();
-    }
-  }, [isAuthenticated]);
+    fetchUsers();
+  }, []);
 
   const fetchUsers = async () => {
     setIsLoading(true);
@@ -217,8 +210,7 @@ export default function AdminUsersPage({ isAuthenticated = true }: AdminUsersPag
     <div className="min-h-screen bg-gray-50">
       {/* Header with Add User button in rightContent */}
       <AppHeader
-        currentPage="admin"
-        adminTab="users"
+        currentPage="users"
         rightContent={
           <Button
             onClick={openAddDialog}

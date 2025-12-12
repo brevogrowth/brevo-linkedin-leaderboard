@@ -257,22 +257,24 @@ export default function AdminUsersPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header with Add User button in rightContent */}
-      <AppHeader
-        currentPage="users"
-        rightContent={
+      <AppHeader currentPage="users" />
+
+      {/* Main Content */}
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* Page Header */}
+        <div className="flex items-center justify-between mb-6">
+          <div>
+            <h2 className="text-2xl font-bold text-gray-900">Users</h2>
+            <p className="text-sm text-gray-500">{users.length} tracked users</p>
+          </div>
           <Button
             onClick={openAddDialog}
-            size="sm"
             leftIcon={<Plus className="h-4 w-4" />}
           >
             Add User
           </Button>
-        }
-      />
+        </div>
 
-      {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {error && (
           <div className="mb-4 p-4 bg-red-50 border border-red-200 rounded-lg flex items-center gap-3 text-red-700">
             <AlertCircle className="h-5 w-5 flex-shrink-0" />

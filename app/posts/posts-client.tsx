@@ -4,7 +4,6 @@ import { useCallback } from 'react';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import {
-  ArrowLeft,
   ThumbsUp,
   MessageCircle,
   Repeat2,
@@ -18,6 +17,7 @@ import { Select } from '@/components/ui/select';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Avatar } from '@/components/ui/avatar';
+import { AppHeader } from '@/components/layout/app-header';
 import { formatDate } from '@/config/branding';
 import { getScoreColor } from '@/lib/scoring';
 import { TEAM_DISPLAY_NAMES } from '@/lib/validation/user-schema';
@@ -100,30 +100,16 @@ export function PostsClient({
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <header className="bg-white border-b border-gray-200 sticky top-0 z-30">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            <div className="flex items-center gap-4">
-              <Link href="/">
-                <Button variant="ghost" size="sm" leftIcon={<ArrowLeft className="h-4 w-4" />}>
-                  Back
-                </Button>
-              </Link>
-              <div>
-                <h1 className="text-lg font-bold text-gray-900">
-                  Posts Explorer
-                </h1>
-                <p className="text-xs text-gray-500">
-                  {pagination.total} posts found
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </header>
+      <AppHeader currentPage="posts" />
 
       {/* Main Content */}
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* Page Title */}
+        <div className="mb-6">
+          <h2 className="text-2xl font-bold text-gray-900">Posts Explorer</h2>
+          <p className="text-sm text-gray-500">{pagination.total} posts found</p>
+        </div>
+
         {/* Filters */}
         <div className="flex flex-col sm:flex-row gap-4 mb-6">
           <Select

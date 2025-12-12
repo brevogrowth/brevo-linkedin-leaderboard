@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { AdminAuthWrapper } from './admin-auth-wrapper';
 
 export const metadata: Metadata = {
   title: 'Admin | LinkedIn Voice Program Tracker',
@@ -10,5 +11,5 @@ export default function AdminLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return children;
+  return <AdminAuthWrapper>{children}</AdminAuthWrapper>;
 }

@@ -9,8 +9,6 @@ import {
   TrendingUp,
   Trophy,
   RefreshCw,
-  Settings,
-  BookOpen,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
@@ -18,6 +16,7 @@ import { Avatar } from '@/components/ui/avatar';
 import { KPICard } from '@/components/business/kpi-card';
 import { LeaderboardTable } from '@/components/business/leaderboard-table';
 import { ScrapeProgressModal } from '@/components/business/scrape-progress-modal';
+import { AppHeader } from '@/components/layout/app-header';
 import { useScrapePolling } from '@/lib/hooks/use-scrape-polling';
 import { formatRelativeTime } from '@/config/branding';
 import type { DashboardKPIs } from '@/types/domain';
@@ -69,36 +68,7 @@ export function DashboardClient({ initialData }: DashboardClientProps) {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <header className="bg-white border-b border-gray-200 sticky top-0 z-30">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            <div className="flex items-center gap-3">
-              <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-                <Trophy className="w-5 h-5 text-white" />
-              </div>
-              <div>
-                <h1 className="text-lg font-bold text-gray-900">
-                  LinkedIn Voice Program
-                </h1>
-                <p className="text-xs text-gray-500">Brevo Sales Leaderboard</p>
-              </div>
-            </div>
-
-            <nav className="flex items-center gap-2">
-              <Link href="/posts">
-                <Button variant="ghost" size="sm" leftIcon={<BookOpen className="h-4 w-4" />}>
-                  Posts
-                </Button>
-              </Link>
-              <Link href="/admin">
-                <Button variant="ghost" size="sm" leftIcon={<Settings className="h-4 w-4" />}>
-                  Admin
-                </Button>
-              </Link>
-            </nav>
-          </div>
-        </div>
-      </header>
+      <AppHeader currentPage="dashboard" />
 
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
